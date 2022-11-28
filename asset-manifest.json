@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/NOTE-PAD/static/css/main.c91d83fc.css",
-    "main.js": "/NOTE-PAD/static/js/main.a3997cc5.js",
+    "main.css": "/NOTE-PAD/static/css/main.dfb90202.css",
+    "main.js": "/NOTE-PAD/static/js/main.6723a303.js",
     "static/js/787.b9381e2e.chunk.js": "/NOTE-PAD/static/js/787.b9381e2e.chunk.js",
     "index.html": "/NOTE-PAD/index.html",
-    "main.c91d83fc.css.map": "/NOTE-PAD/static/css/main.c91d83fc.css.map",
-    "main.a3997cc5.js.map": "/NOTE-PAD/static/js/main.a3997cc5.js.map",
+    "main.dfb90202.css.map": "/NOTE-PAD/static/css/main.dfb90202.css.map",
+    "main.6723a303.js.map": "/NOTE-PAD/static/js/main.6723a303.js.map",
     "787.b9381e2e.chunk.js.map": "/NOTE-PAD/static/js/787.b9381e2e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c91d83fc.css",
-    "static/js/main.a3997cc5.js"
+    "static/css/main.dfb90202.css",
+    "static/js/main.6723a303.js"
   ]
 }
