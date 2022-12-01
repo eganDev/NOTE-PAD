@@ -4,7 +4,6 @@ import NoteList from './components/NoteList';
 import DeleteAlert from './components/DeleteAlert';
 import NotDetect from './components/NotDetect';
 import AddNote from './components/AddNote';
-import BookmarksList from './components/BookmarksList';
 import { useState, useMemo } from 'react';
 import { MdCancel } from "react-icons/md";
 import { EditorState, convertToRaw } from 'draft-js';
@@ -15,6 +14,8 @@ import draftToHtml from "draftjs-to-html";
 import { useEffect } from 'react';
 import InputAlertEmpty from './components/InputAlertEmpty';
 import TitleEmptyAlert from './components/TitleEmptyAlert';
+import { useRef } from 'react';
+import SameTitleAlert from './components/SameTitleAlert';
 
 function App() {
   const [Notes, setNotes] = useState({
@@ -25,7 +26,7 @@ function App() {
     btnBookmarks: "text-slate-400",
     status: ""
   })
-
+  const TileRef = useRef(0);
   const [NoteLists, setNoteLists] = useState(JSON.parse(localStorage.getItem('NotesList')) ?? []);
   let NoteListsReverse = [...NoteLists].reverse();
   const [editorState, setEditorState] = useState(
@@ -73,6 +74,7 @@ function App() {
     })
     setBookmarks(bookmarksNote => false)
     setBookmarkBtn(BookmarkBtn => false)
+    
   }
   const Save = () => {
     if (Notes.title.trimEnd() ==='' && Notes.content === '' ) {
@@ -81,8 +83,15 @@ function App() {
     } else if (Notes.title.trimEnd() ===''){
         checkTitle();
         return;
+    } else if ((
+      NoteLists.some((value, index) => {
+          return value.title === Notes.title
+      })
+    ) === true) {
+      TitleDetection()
+      return
     } else {
-        SaveFunct();
+      SaveFunct();
     }
   }
 
@@ -91,6 +100,8 @@ function App() {
       __html: DOMPurify.sanitize(html)
     }
   }
+
+
   const [BookmarksList, setBookmarksList] = useState([])
   const creatBookmarksList = () => {
       let newBookmarksList = NoteLists.filter((value, index) => value.bookmarks === true); 
@@ -107,11 +118,12 @@ function App() {
   const [addNewNotesClick, setNewNotesClick] = useState(false);
   const [BookmarkBtn, setBookmarkBtn] = useState(false);
   const [DelectBtn, setDeleteBtn] = useState(false);
-
+  const [detectSameTitle, setDetectSameTitle] = useState(false)
   //feature functions
   const checkDelecteAlert = () => {
     setCheckDelete(checkDelete => !checkDelete);
     onclickDeleteBtn();
+    
   }
   const checkDetectNotes = () => {
     setDetectNote(DetectNote => !DetectNote);
@@ -123,9 +135,11 @@ function App() {
   }
   const checkNoteEmpty = () => {
     setDetectInput(detectInput => !detectInput);
+
   }
   const checkTitle = (e) => {
     setDetectTileIsEmpty(detectTitleIsET => !detectTitleIsET);
+    TileRef.current.focus();
   }
   const changeAddNotesColor = () => {
     setNewNotesClick(addNewNotesClick => true);
@@ -141,7 +155,9 @@ function App() {
     creatBookmarksList();
     onlickBookmarkBtn()
   } 
-
+  const TitleDetection = () => {
+    setDetectSameTitle(detectSameTitle => !detectSameTitle)
+  }
   const checkClose = () => {
     setAddNote(addNote => false)
     setEditorState(EditorState.createEmpty())
@@ -162,9 +178,10 @@ function App() {
   let openTitleETAlert = detectTitleIsET ? "" : "hidden";
   let changeToBookmarked = bookmarksNote ? "bg-yellow-100" : "bg-slage-100";
   let openBookmarks = bookmarksNote ? "" : "hidden";
-  let yellowForNewNotes = addNewNotesClick ? "bg-yellow-50" : ""
-  let yellowForBookmarkBtn = BookmarkBtn ? "bg-yellow-50" : ""
-  let yellowForDeleteBtn = DelectBtn ? "bg-yellow-50" : ""
+  let yellowForNewNotes = addNewNotesClick ? "bg-green-100" : ""
+  let yellowForBookmarkBtn = BookmarkBtn ? "bg-green-100" : ""
+  let yellowForDeleteBtn = DelectBtn ? "bg-green-100" : ""
+  let openSameTitleAlert = detectSameTitle ? "" : "hidden";
   return (
     <>
       <div >
@@ -203,6 +220,8 @@ function App() {
                       openDeleteAlert = {openDeleteAlert}
                       checkDelecteAlert = {(e) => checkDelecteAlert(e)}
                       setNoteLists = {setNoteLists}
+                      setBookmarkBtn = {setBookmarkBtn}
+                      setBookmarks = {setBookmarks}
                   ></DeleteAlert>
                   <NotDetect
                       openNotesDetect = {openNotesDetect}
@@ -212,11 +231,19 @@ function App() {
                   <InputAlertEmpty
                       openNoteEmptyAlert = {openNoteEmptyAlert}
                       checkNoteEmpty = {(e) => checkNoteEmpty(e)} 
+                      TileRef = {TileRef}
                   ></InputAlertEmpty>
                   <TitleEmptyAlert
                       openTitleETAlert = {openTitleETAlert}
                       checkTitle = {(e) => checkTitle(e)}
                   ></TitleEmptyAlert>
+                  <SameTitleAlert
+                    openSameTitleAlert = {openSameTitleAlert}
+                    TitleDetection = {(e) => TitleDetection(e)}
+                    TileRef = {TileRef}
+                    setNotes = {setNotes}
+                    Notes = {Notes}
+                  ></SameTitleAlert>
 
                   <div className='width-input bg-white rounded-md my-2 mr-2 overflow-hidden shadow-xl relative'>
                       <div className='Note-List-Header px-4 py-3 border-b flex justify-between select-none'>
@@ -237,6 +264,7 @@ function App() {
                               <textarea id="freeform" name="freeform" rows="2" cols="60" className='text-lg scrollbar-hide top-8 outline-none width-95 border ml-4 mt-4 px-2 mb-2' placeholder='Type note title'
                               onChange={(e) => onChangeTitle(e)}
                               value = {Notes.title}
+                              ref = {TileRef}
                               >
                               </textarea>
                             </div>

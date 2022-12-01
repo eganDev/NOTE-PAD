@@ -1,9 +1,11 @@
 import React from 'react'
 import { MdCancel } from "react-icons/md";
-function DeleteAlert({openDeleteAlert, checkDelecteAlert, setNoteLists,}) {
+function DeleteAlert({openDeleteAlert, checkDelecteAlert, setNoteLists,setBookmarks, setBookmarkBtn}) {
     const deleteAllNote = () => {
         setNoteLists([]);
         checkDelecteAlert();
+        setBookmarks(bookmarksNote => false)
+        setBookmarkBtn(BookmarkBtn => false)
   }
   return (
     <>
