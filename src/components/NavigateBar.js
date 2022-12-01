@@ -1,7 +1,7 @@
 import React from 'react'
-import { FcSearch, FcPlus, FcBookmark,FcSettings } from "react-icons/fc";
+import { FcSearch, FcPlus, FcBookmark, } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
-function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNotes}) {
+function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNotes, addBookmarks, yellowForNewNotes, yellowForBookmarkBtn, yellowForDeleteBtn}) {
 
   return (
     <>
@@ -11,17 +11,19 @@ function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNote
                                 <FcSearch className='mr-2 text-xl'></FcSearch>
                                 <input type="" name="" placeholder='Type to search' className='border-none outline-none'></input>
                           </div>
-                          <div className='add-note  mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:scale-105 '
+                          <div className={`add-note  mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:bg-yellow-50 ${yellowForNewNotes} `}
                               onClick={(e) => checkAddNote(e)}>
                                 <FcPlus className='mr-2 text-lg'></FcPlus>
-                                <button type="" className='font-bold'>Add new note</button>
+                                <button type="" className='font-bold'>Add new notes</button>
                           </div>
-                          <div className='Star-notes mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:scale-105 '>
+                          <div className={`Star-notes mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:bg-yellow-50 ${yellowForBookmarkBtn}`}
+                              onClick={(e) => addBookmarks(e)}
+                          >
                                 <FcBookmark className='mr-2 text-lg'></FcBookmark>
-                                <button type="" className='font-bold' >Bookmark</button>
+                                <button type="" className='font-bold' >Bookmarks</button>
                           </div>
                           
-                          <div className='Delete-note mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:scale-105 '
+                          <div className={`only:Delete-note mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:bg-yellow-50 ${yellowForDeleteBtn} `}
                               onClick={(e) => 
                               {
                                     if (NoteLists.length === 0) {
@@ -36,12 +38,12 @@ function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNote
                           </div>
                       </div>
 
-                      <div>
+                      {/* <div>
                             <div className='Star-notes mt-2  bg-white flex pl-4 items-center py-4  rounded-md shadow-lg cursor-pointer transition hover:scale-105 bottom-0 mb-2'> 
                                   <FcSettings className='mr-2 text-xl'></FcSettings>
                                   <button type="" className='font-bold'>Setting</button>
                             </div>  
-                      </div>
+                      </div> */}
                   </div>
     </>
   )

@@ -27,6 +27,7 @@
 }
 .Text-Editor {
     height: 500px;
+    overflow-x: unset;
     overflow-y: auto;
 
 }
@@ -44,5 +45,6 @@
     margin: auto;
 }
 .bg-transparent-css {
-    background-color:rgba(57, 57, 57, 0.09);
+    background-color:rgba(57, 57, 57, 0.247);
 }
+

@@ -2,7 +2,7 @@
   "name": "note-pad",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vuvudev.github.io/NOTE-PAD/",
+  "homepage": "https://eganDev.github.io/NOTE-PAD/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -16,9 +16,12 @@
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-icons": "^4.6.0",
+    "react-redux": "^8.0.5",
     "react-scripts": "5.0.1",
+    "redux-thunk": "^2.4.2",
     "save-dev": "^0.0.1-security",
     "tailwind-scrollbar-hide": "^1.1.7",
+    "uuid": "^9.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

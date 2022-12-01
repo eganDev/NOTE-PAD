@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdCancel } from "react-icons/md";
-function DeleteAlert({openDeleteAlert, checkDelecteAlert, setNoteLists}) {
+function DeleteAlert({openDeleteAlert, checkDelecteAlert, setNoteLists,}) {
     const deleteAllNote = () => {
         setNoteLists([]);
         checkDelecteAlert();
@@ -8,7 +8,7 @@ function DeleteAlert({openDeleteAlert, checkDelecteAlert, setNoteLists}) {
   return (
     <>
         
-        <div className={`bg-neutral-200 z-10 absolute top-0 left-0 w-full h-full flex items-center bg-transparent-css ${openDeleteAlert}`}>
+        <div className={`bg-neutral-300 z-10 absolute top-0 left-0 w-full h-full flex items-center bg-transparent-css ${openDeleteAlert}`}>
           <div className='alert-box rounded-md shadow-lg overflow-hidden'>
               <div className='h-8 border-b flex items-center justify-end'>
                   <MdCancel className='text-xl mr-2 text-red-500 hover:scale-105 cursor-pointer transition'
