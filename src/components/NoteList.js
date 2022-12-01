@@ -50,7 +50,7 @@ function NoteList({NoteLists, createMarkup, setNoteLists, openBookmarks,Bookmark
         <div className='width-650px ml-2 bg-white rounded-md m-2 overflow-hidden shadow-xl relative'>
                     <div className='Note-List-Header px-4 py-3 border-b flex justify-between select-none'>
                           <h2 className='font-bold text-lg'>Your Notes:</h2>
-                        <div className={`flex items-center cursor-pointer hover:bg-slate-200 rounded-md px-1 transition ${activeButton}`}
+                        <div className={`flex items-center cursor-pointer hover:bg-slate-200 ${NoteLists.length === 0 ? "hidden" : ""} rounded-md px-1 transition ${activeButton}`}
                           onClick={(e) => {
                               if (NoteLists.length === 0) {
                                 setBtnEdit(btnEdit => false)
