@@ -16,7 +16,7 @@ import InputAlertEmpty from './components/InputAlertEmpty';
 import TitleEmptyAlert from './components/TitleEmptyAlert';
 import { useRef } from 'react';
 import SameTitleAlert from './components/SameTitleAlert';
-
+import NoteWatching from './components/NoteWatching';
 function App() {
   const [Notes, setNotes] = useState({
     title: "",
@@ -74,6 +74,7 @@ function App() {
     })
     setBookmarks(bookmarksNote => false)
     setBookmarkBtn(BookmarkBtn => false)
+    setSearchList(searchList => true)
     
   }
   const Save = () => {
@@ -107,7 +108,22 @@ function App() {
       let newBookmarksList = NoteLists.filter((value, index) => value.bookmarks === true); 
       setBookmarksList([...newBookmarksList].reverse())
   }
-  console.log(BookmarksList);
+  let searchWord;
+  const [filteredData, setFilteredData] = useState([]);
+  const handleFilter = (e) => {
+      searchWord = e.target.value
+      setSearchList(searchList => false)
+      setBookmarks(bookmarksNote => false);
+      setBookmarkBtn(BookmarkBtn => false);
+      let newFilter = NoteLists.filter((value, index) => {
+        return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      })
+      setFilteredData([...newFilter].reverse())
+  }
+
+  const [newWatchingNote, setNewWatchingNote] = useState([])
+  console.log(newWatchingNote);
+
   //features
   const [checkDelete, setCheckDelete] = useState(false);
   const [DetectNote, setDetectNote] = useState(false);
@@ -119,6 +135,10 @@ function App() {
   const [BookmarkBtn, setBookmarkBtn] = useState(false);
   const [DelectBtn, setDeleteBtn] = useState(false);
   const [detectSameTitle, setDetectSameTitle] = useState(false)
+  const [searchList, setSearchList] = useState(false);
+  const [btnEdit, setBtnEdit] = useState(false);
+  const [ButtonActive, setBtnActive] = useState(false);
+  const [openWatching, setOpenWatching] = useState(false);
   //feature functions
   const checkDelecteAlert = () => {
     setCheckDelete(checkDelete => !checkDelete);
@@ -146,6 +166,7 @@ function App() {
   }
   const onlickBookmarkBtn = () => {
     setBookmarkBtn(BookmarkBtn => !BookmarkBtn);
+    handleSearchList()
   }
   const onclickDeleteBtn = () => {
     setDeleteBtn(DelectBtn => !DelectBtn);
@@ -153,10 +174,24 @@ function App() {
   const addBookmarks = (e) => {
     setBookmarks(bookmarksNote => !bookmarksNote);
     creatBookmarksList();
-    onlickBookmarkBtn()
+    onlickBookmarkBtn();
+    setBtnActive(ButtonActive => false);
+    setBtnEdit(btnEdit => false)
   } 
   const TitleDetection = () => {
     setDetectSameTitle(detectSameTitle => !detectSameTitle)
+  }
+  const handleSearchList = () => {
+    setSearchList(searchList => true)
+  }
+  const checkBtnClick = (e) => {
+    setBtnActive(ButtonActive => !ButtonActive)
+  }
+  const checkBtnEdit = (e) => {
+    setBtnEdit(btnEdit => !btnEdit);
+  }
+  const checkOpenWatching = () => {
+    setOpenWatching(openWatching => !openWatching);
   }
   const checkClose = () => {
     setAddNote(addNote => false)
@@ -178,10 +213,15 @@ function App() {
   let openTitleETAlert = detectTitleIsET ? "" : "hidden";
   let changeToBookmarked = bookmarksNote ? "bg-yellow-100" : "bg-slage-100";
   let openBookmarks = bookmarksNote ? "" : "hidden";
-  let yellowForNewNotes = addNewNotesClick ? "bg-green-100" : ""
-  let yellowForBookmarkBtn = BookmarkBtn ? "bg-green-100" : ""
-  let yellowForDeleteBtn = DelectBtn ? "bg-green-100" : ""
+  let yellowForNewNotes = addNewNotesClick ? "bg-blue-100" : ""
+  let yellowForBookmarkBtn = BookmarkBtn ? "bg-blue-100" : ""
+  let yellowForDeleteBtn = DelectBtn ? "bg-blue-100" : ""
   let openSameTitleAlert = detectSameTitle ? "" : "hidden";
+  let openSearchedList = searchList ? "hidden" : "";  
+  let openDelectBtn = btnEdit ? "" : "hidden";
+  let activeButton = ButtonActive ? "bg-slate-200" : "";
+  let WatchingNoteActive = openWatching ? "" : "hidden";
+  
   return (
     <>
       <div >
@@ -203,6 +243,8 @@ function App() {
                   yellowForNewNotes = {yellowForNewNotes}
                   yellowForBookmarkBtn = {yellowForBookmarkBtn}
                   yellowForDeleteBtn = {yellowForDeleteBtn}
+                  onChangeSearch = {(e) => handleFilter(e)}
+                  searchWord = {searchWord}
                   ></NavigateBar>
                   <NoteList 
                   NoteLists = {NoteListsReverse}
@@ -214,6 +256,19 @@ function App() {
                   BookmarksListStage = {BookmarksList}
                   setBookmarksList = {setBookmarksList}
                   creatBookmarksList = {(e) => creatBookmarksList(e)}
+                  openSearchedList = {openSearchedList}
+                  filteredData = {filteredData}
+                  setBookmarks = {setBookmarks}
+                  setBookmarkBtn = {setBookmarkBtn}
+                  handleSearchList = {(e) => handleSearchList(e)}
+                  checkBtnClick = {(e) => checkBtnClick(e)}
+                  checkBtnEdit = {(e) => checkBtnEdit(e)}
+                  activeButton = {activeButton}
+                  setBtnEdit = {setBtnEdit}
+                  setBtnActive = {setBtnActive}
+                  openDelectBtn = {openDelectBtn}   
+                  setNewWatchingNote = {setNewWatchingNote} 
+                  checkOpenWatching = {(e) => checkOpenWatching(e)}            
                   ></NoteList>   
                  
                   <DeleteAlert
@@ -222,6 +277,7 @@ function App() {
                       setNoteLists = {setNoteLists}
                       setBookmarkBtn = {setBookmarkBtn}
                       setBookmarks = {setBookmarks}
+                      setSearchList = {setSearchList}
                   ></DeleteAlert>
                   <NotDetect
                       openNotesDetect = {openNotesDetect}
@@ -244,8 +300,14 @@ function App() {
                     setNotes = {setNotes}
                     Notes = {Notes}
                   ></SameTitleAlert>
-
-                  <div className='width-input bg-white rounded-md my-2 mr-2 overflow-hidden shadow-xl relative'>
+                  <NoteWatching
+                  newWatchingNote = {newWatchingNote}
+                  WatchingNoteActive = {WatchingNoteActive}
+                  checkOpenWatching = {(e) => checkOpenWatching(e)}
+                  createMarkup = {(e) => createMarkup(e)}
+                  >
+                  </NoteWatching>
+                  <div className='width-input bg-white rounded-md my-2 mr-2 overflow-hidden box-shadow-component relative'>
                       <div className='Note-List-Header px-4 py-3 border-b flex justify-between select-none'>
                             <h2 className='font-bold text-lg'>Write notes</h2>
                             <div className='flex items-center justify-center cursor-pointer hover:bg-slate-200 rounded-md px-1 transition' 

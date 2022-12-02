@@ -1,7 +1,7 @@
 import React from 'react'
 import { FcSearch, FcPlus, FcBookmark, } from "react-icons/fc";
 import { MdDeleteForever } from "react-icons/md";
-function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNotes, addBookmarks, yellowForNewNotes, yellowForBookmarkBtn, yellowForDeleteBtn}) {
+function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, searchWord,checkDetectNotes, addBookmarks, yellowForNewNotes, yellowForBookmarkBtn, yellowForDeleteBtn, onChangeSearch}) {
 
   return (
     <>
@@ -9,7 +9,10 @@ function NavigateBar({NoteLists, checkAddNote, checkDeleteAlert, checkDetectNote
                       <div>
                           <div className='Search mt-2 bg-white flex pl-4 items-center py-4 rounded-md shadow-lg'>
                                 <FcSearch className='mr-2 text-xl'></FcSearch>
-                                <input type="" name="" placeholder='Type to search' className='border-none outline-none'></input>
+                                <input type="" name="" placeholder='Type to search' className='border-none outline-none'
+                                onChange={(e) => onChangeSearch(e)}
+                                value = {searchWord}
+                                ></input>
                           </div>
                           <div className={`add-note  mt-2  bg-white flex pl-4 items-center py-4 rounded-md shadow-lg cursor-pointer transition hover:bg-yellow-50 ${yellowForNewNotes} `}
                               onClick={(e) => checkAddNote(e)}>

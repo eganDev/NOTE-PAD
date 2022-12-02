@@ -12,7 +12,8 @@ function SameTitleAlert({openSameTitleAlert, TitleDetection, TileRef, setNotes, 
               </div>
               <div className='flex flex-col justify-evenly h-40 w-full items-center select-none'>
                   <div className=''>
-                    <h3 className='font-bold text-red-500'>You must enter different title to be saved!</h3>
+                    <h3 className='font-bold text-red-500'>Opps! This title is duplicated!</h3>
+                    <h3 className='font-bold text-black'>Please enter a new title...</h3>
                   </div>
                   <div className='flex justify-between '>
                         <button type="" className=' w-12 h-6 border-2 hover:border-blue-300 flex justify-center items-center rounded-md transition hover:bg-blue-300'
