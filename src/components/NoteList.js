@@ -91,9 +91,9 @@ function NoteList({NoteLists, checkOpenWatching,createMarkup, setNewWatchingNote
                       } 
                     </div>
 
-                    <div className='absolute h-12 bg-white w-full left-0 top-0'>
+                    {/* <div className='absolute h-12 bg-white w-full left-0 top-0'>
                        <h3>dqoeuouoiwer</h3>
-                    </div>
+                    </div> */}
                   <BookmarksList
                   openBookmarks = {openBookmarks}
                   addBookmarks = {(e) => addBookmarks(e)}
