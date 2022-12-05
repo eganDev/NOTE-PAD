@@ -31,7 +31,7 @@ function SearchingList({filteredData, createMarkup, checkOpenWatching,setNewWatc
                                         key = {value.title}
                                         >
                                         <div className='flex justify-between'>
-                                            <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12'>{value.title}</h2>
+                                            <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12 max-h-12'>{value.title}</h2>
                                             <div className=' flex flex-col-reverse items-center w-14 bg-slate-200 justify-evenly absolute h-full rounded-md top-0 right-0'>
                                             <MdOutlineOpenInNew className='text-2xl hover:scale-125 text-sky-500 transition cursor-pointer'
                                             onClick={() => handleOpenWatchingOnSearch(value)}

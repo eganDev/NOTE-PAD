@@ -52,7 +52,7 @@ function BookmarksList({NoteLists, createMarkup, checkOpenWatching, setNewWatchi
                                         key = {value.title}
                                         >
                                         <div className='flex justify-between'>
-                                            <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12'>{value.title}</h2>
+                                            <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12 max-h-12'>{value.title}</h2>
                                             <div className=' flex flex-col-reverse items-center w-14 bg-slate-200 justify-evenly absolute h-full rounded-md top-0 right-0'>
                                                 <BsFillBookmarkFill className={`text-2xl ${value.btnBookmarks} hover:scale-125 transition cursor-pointer`}
                                                     onClick = {() => DeleteBookmarks(value)}

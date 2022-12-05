@@ -24,7 +24,7 @@ function DeleteAlert({openDeleteAlert, setSearchList,checkDelecteAlert, setNoteL
                     <h3 className='font-bold'>Are you sure you want to delete all notes?</h3>
                     <h4 className='font-bold text-red-500'>Your data cannot be recovered!</h4>
                   </div>
-                  <div className='w-40 flex justify-between '>
+                  <div className='w-40 flex flex-row-reverse justify-between '>
                         <button type="" className=' w-12 h-6 border-2 hover:border-green-400 flex justify-center items-center rounded-md transition hover:bg-green-400'
                          onClick={(e) => checkDelecteAlert(e)}>No</button>
                         <button type="" className=' w-12 h-6 border-2 hover:border-red-400 flex justify-center items-center rounded-md transition hover:bg-red-400'

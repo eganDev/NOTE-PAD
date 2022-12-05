@@ -152,6 +152,7 @@ function App() {
   const checkAddNote = () => {
     setAddNote(addNote => true);
     changeAddNotesColor();
+    setBookmarks(bookmarksNote => false);
   }
   const checkNoteEmpty = () => {
     setDetectInput(detectInput => !detectInput);
@@ -163,6 +164,7 @@ function App() {
   }
   const changeAddNotesColor = () => {
     setNewNotesClick(addNewNotesClick => true);
+    handleSearchList()
   }
   const onlickBookmarkBtn = () => {
     setBookmarkBtn(BookmarkBtn => !BookmarkBtn);
@@ -335,7 +337,9 @@ function App() {
                               onEditorStateChange={handleEditorChange}
                               toolbarClassName = "toolbarClassName"
                               wrapperClassName="wrapperClassName"
-                              editorClassName="editorClassName"/>
+                              editorClassName="editorClassName"
+                              placeholder='Type note contents'
+                              />
                             </div>
                       </div>
                       <div className='flex justify-end mr-4 ml-4 select-none'>

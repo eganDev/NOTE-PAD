@@ -56,19 +56,20 @@ function NoteList({NoteLists, checkOpenWatching,createMarkup, setNewWatchingNote
                           >
                             <AiFillEdit className='text-lg mr-1 text-green-600'></AiFillEdit>
                             <button type="" className='font-bold relative'
-                            >Delete</button>
+                            >Edit</button>
+                            
                         </div>
                          
                     </div>
 
-                    <div className='w-full h-full px-4 py-2 overflow-y-auto scrollbar-hide pb-16 relative'>
+                    <div className='w-full h-full px-4 py-2  overflow-y-auto scrollbar-hide pb-16 relative'>
                       {
                         NoteLists.map((notes, index) => (
                           <div className={` ${notes.color} max-h-60 rounded-md py-3 px-3 relative transition h-fit box-shadow-note mb-4 select-none `}
                                 key = {notes.title}
                           >
                           <div className='flex justify-between'>
-                              <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12'>{notes.title}</h2>
+                              <h2 className='mb-2 font-bold pl-3 overflow-hidden pr-12 max-h-12'>{notes.title}</h2>
                               <div className=' flex flex-col-reverse items-center w-14 bg-slate-200 justify-evenly absolute h-full rounded-md top-0 right-0'>
                                   {<BsFillBookmarkFill className={`text-2xl ${notes.btnBookmarks} hover:scale-125 transition cursor-pointer`}
                                   onClick={(e) => {
@@ -88,9 +89,10 @@ function NoteList({NoteLists, checkOpenWatching,createMarkup, setNewWatchingNote
                           </div>
                         ))
                       } 
-                      
-                    
+                    </div>
 
+                    <div className='absolute h-12 bg-white w-full left-0 top-0'>
+                       <h3>dqoeuouoiwer</h3>
                     </div>
                   <BookmarksList
                   openBookmarks = {openBookmarks}
